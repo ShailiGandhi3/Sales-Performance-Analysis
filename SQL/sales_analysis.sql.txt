@@ -1,0 +1,33 @@
+-- Sales Performance Analysis
+
+-- 1. Total Sales
+SELECT SUM(sales_amount) AS total_sales
+FROM sales;
+
+-- 2. Average Sales
+SELECT AVG(sales_amount) AS average_sales
+FROM sales;
+
+-- 3. Sales by Customer
+SELECT 
+    customer_name,
+    SUM(sales_amount) AS total_sales
+FROM sales
+GROUP BY customer_name;
+
+-- 4. Monthly Sales
+SELECT 
+    YEAR(sale_date) AS sales_year,
+    MONTH(sale_date) AS sales_month,
+    SUM(sales_amount) AS total_sales
+FROM sales
+GROUP BY YEAR(sale_date), MONTH(sale_date)
+ORDER BY sales_year, sales_month;
+
+-- 5. Top 3 Customers
+SELECT TOP 3
+    customer_name,
+    SUM(sales_amount) AS total_sales
+FROM sales
+GROUP BY customer_name
+ORDER BY total_sales DESC;
